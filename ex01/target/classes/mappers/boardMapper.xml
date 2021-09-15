@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+ <insert id="create">
+ insert into 교_스타일 (스타일,태그가,bno) 
+ values(#{스타일},#{태그가},#{bno})
+ </insert>
+
+ <select id="read" resultType="org.zerock.domain.BoardVO">
+ select 
+   스타일,태그가,bno
+ from 
+   교_스타일
+ where 스타일 = #{스타일}
+ </select>
+  
+ <delete id="delete">
+ delete from 교_스타일 where 스타일 = #{스타일}
+ </delete>
+ 
+ <select id="listAll" resultType="org.zerock.domain.BoardVO">
+ <![CDATA[
+ select *
+  from 교_스타일
+ ]]>
+ </select>
+ 
+ <update id="update">
+ update 교_스타일 set 태그가 = #{태그가}
+ where 스타일 = #{스타일}
+ </update>
+  
+</mapper>
