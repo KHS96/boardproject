@@ -3,6 +3,7 @@ package org.zerock.persistence;
 import java.util.List;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 public interface BoardDAO {
 
@@ -16,4 +17,7 @@ public interface BoardDAO {
 
   public List<BoardVO> listAll() throws Exception;
 
+  public List<BoardVO> listPage(int page) throws Exception;
+  
+  public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 }

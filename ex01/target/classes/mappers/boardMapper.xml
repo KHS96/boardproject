@@ -34,4 +34,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  where 스타일 = #{스타일}
  </update>
   
+  
+ <select id="listPage" resultType="org.zerock.domain.BoardVO">
+ 	<![CDATA[
+ 	select *
+from   (select ROWNUM RNUM,
+               A.*
+        from   (select *
+                from   교_스타일
+                order by bno desc ) A ) B
+where  RNUM between #{page} and #{page}+3
+ 	]]>
+ </select>
+ 
+ 
+ <select id="listCriteria" resultType="org.zerock.domain.BoardVO">
+ 	<![CDATA[
+ 	 	select *
+from   (select ROWNUM RNUM,
+               A.*
+        from   (select *
+                from   교_스타일
+                order by bno desc ) A ) B
+where  RNUM between #{pageStart} and #{pageStart}+#{perPageNum}-1
+ 	]]>
+ </select>
+  
 </mapper>
