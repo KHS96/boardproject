@@ -60,4 +60,16 @@ where  RNUM between #{pageStart} and #{pageStart}+#{perPageNum}-1
  	]]>
  </select>
   
+  
+ <select id="countPaging" resultType="int">
+ <![CDATA[
+ select
+  count(bno)
+  from 
+   교_스타일
+   where 
+   bno > 0 
+ ]]>
+ </select>
+  
 </mapper>

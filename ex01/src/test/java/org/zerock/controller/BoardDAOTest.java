@@ -32,17 +32,26 @@ public class BoardDAOTest {
 	 * board.set태그가(111000); board.setBno(11); dao.create(board); }
 	 */
 
+//@Test
+//	public void testListCriteria()throws Exception{
+//	Criteria cri = new Criteria();
+//	cri.setPage(2);
+//	cri.setPerPageNum(3);
+//	
+//	List<BoardVO> list = dao.listCriteria(cri);
+//	
+//	for(BoardVO boardVO : list) {
+//		logger.info(boardVO.getBno() + " : " + boardVO.get스타일());
+//	}
+//}
+
 @Test
-	public void testListCriteria()throws Exception{
-	Criteria cri = new Criteria();
-	cri.setPage(2);
-	cri.setPerPageNum(3);
+	public void testURI() throws Exception{
+	UriComponents uriComponents = 
+			UriComponentsBuilder.newInstance().path("/board/read").queryParam("bno",12).queryParam("perPageNum",20).build();
 	
-	List<BoardVO> list = dao.listCriteria(cri);
-	
-	for(BoardVO boardVO : list) {
-		logger.info(boardVO.getBno() + " : " + boardVO.get스타일());
-	}
+	logger.info("/board/read?bno=12&perPageNum=20");
+	logger.info(uriComponents.toString());
 }
 
 }

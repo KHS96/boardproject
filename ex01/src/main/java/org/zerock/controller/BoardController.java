@@ -92,26 +92,24 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(Criteria cri, Model model) throws Exception {
-
+	public void listPage(@ModelAttribute("cri")Criteria cri, Model model) throws Exception{
 		logger.info(cri.toString());
-
-		model.addAttribute("list", service.listCriteria(cri));
+		
+		model.addAttribute("list",service.listCriteria(cri));
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri); // pageMaker.setTotalCount(131);
-
-		pageMaker.setTotalCount(131);
-
-		model.addAttribute("pageMaker", pageMaker);
-	}
-
-	/*
-	 * @RequestMapping(value = "/readPage", method = RequestMethod.GET) public void
-	 * read(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model
-	 * model) throws Exception {
-	 * 
-	 * model.addAttribute(service.read(bno)); }
-	 * 
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		
+		model.addAttribute("pageMaker",pageMaker);	
+		}
+	
+	  @RequestMapping(value = "/readPage", method = RequestMethod.GET) public void
+	  read(@RequestParam("스타일") String 스타일, @ModelAttribute("cri") Criteria cri, Model
+	  model) throws Exception {
+	  
+	  model.addAttribute(service.read(스타일)); }
+	 /* 
 	 * @RequestMapping(value = "/removePage", method = RequestMethod.POST) public
 	 * String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes
 	 * rttr) throws Exception {
