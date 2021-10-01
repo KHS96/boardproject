@@ -10,16 +10,40 @@
 <section class="content">
 	<div class="row">
 		<!-- left column -->
+
+
 		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
 					<h3 class="box-title">Board List</h3>
 				</div>
+
+
 				<div class='box-body'>
+
+					<select name="searchType">
+						<option value="n"
+							<c:out value="${cri.searchType == null?'selected':''}"/>>
+							---</option>
+						<option value="t"
+							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+							스타일</option>
+						<option value="c"
+							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+							태그가</option>
+						<option value="w"
+							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+							Bno</option>
+					</select> <input type="text" name='keyword' id="keywordInput"
+						value='${cri.keyword }'>
+					<button id='searchBtn'>Search</button>
 					<button id='newBtn'>New Board</button>
+
 				</div>
 			</div>
+
+
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">LIST PAGING</h3>
@@ -28,7 +52,7 @@
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 10px">BNO</th>
-							<th>스타일</th>
+							<th>TITLE</th>
 							<th>태그가</th>
 						</tr>
 
@@ -37,8 +61,9 @@
 							<tr>
 								<td>${boardVO.bno}</td>
 								<td><a
-									href='/board/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&스타일=${boardVO['스타일']}'>${boardVO['스타일']}</a></td>
+									href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&스타일=${boardVO['스타일']}'>${boardVO['스타일']} </a></td>
 								<td>${boardVO['태그가']}</td>
+								
 							</tr>
 
 						</c:forEach>
@@ -55,88 +80,71 @@
 
 							<c:if test="${pageMaker.prev}">
 								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
-
+									href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
-							<c:forEach begin="${pageMaker.startPage }"
+							<c:forEach begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${idx}">${idx}</a>
-
+									<a href="list${pageMaker.makeQuery(idx)}">${idx}</a>
 								</li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;
-
-								</a></li>
+									href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
 
 						</ul>
 					</div>
 
-
-					<%-- 	<div class="text-center">
-						<ul class="pagination">
-
-							<c:if test="${pageMaker.prev}">
-								<li><a href="listPage?page=${pageMaker.startPage - 1}">&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${idx}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a href="listPage?page=${pageMaker.endPage +1}">&raquo;</a></li>
-							</c:if>
-
-						</ul>
-					</div>
-
-
-				</div> --%>
-					<!-- /.box-footer-->
 				</div>
+				<!-- /.box-footer-->
 			</div>
-			<!--/.col (left) -->
-
 		</div>
-		<!-- /.row -->
+		<!--/.col (left) -->
+
+	</div>
+	<!-- /.row -->
 </section>
 <!-- /.content -->
-
-<form id="jobForm">
-	<input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
-	<input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
-</form>
 
 
 <script>
 	var result = '${msg}';
 
-	if (result == 'success') {
+	if (result == 'SUCCESS') {
 		alert("처리가 완료되었습니다.");
 	}
-	
-	$(".pagination li a").on("click", function(event){
-		
-		event.preventDefault(); 
-		
-		var targetPage = $(this).attr("href");
-		
-		var jobForm = $("#jobForm");
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","/board/listPage").attr("method", "get");
-		jobForm.submit();
-	});
-	
+</script>
+
+<script>
+	$(document).ready(
+			function() {
+
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+
+							str = "list"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+									
+							console.log(str);
+							
+							self.location = str;
+
+						});
+
+				$('#newBtn').on("click", function(evt) {
+
+					self.location = "register";
+
+				});
+
+			});
 </script>
 
 <%@include file="../include/footer.jsp"%>

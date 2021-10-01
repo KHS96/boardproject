@@ -16,7 +16,7 @@
 
  <form role="form" action="modifyPage" method="post">
     
-    <input type='hidden' name='bno' value ="${boardVO.bno}">
+    <input type='hidden' name='스타일' value ="${boardVO['스타일']}">
     <input type='hidden' name='page' value ="${cri.page}">
     <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
     
@@ -26,12 +26,12 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Title</label>
       <input type="text" name='title' class="form-control" 
-         value="${boardVO.['스타일']}" readonly="readonly">
+         value="${boardVO['스타일']}" readonly="readonly">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
       <textarea class="form-control"  name="content" rows="3" 
-      readonly="readonly">${boardVO.['태그가']}</textarea>
+      readonly="readonly">${boardVO['태그가']}</textarea>
     </div>
 
   </div><!-- /.box-body -->
@@ -51,19 +51,19 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$(".btn-warning").on("click", function(){
-		formObj.attr("action", "/board/modifyPage");
+		formObj.attr("action", "/sboard/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
 	
 	$(".btn-danger").on("click", function(){
-		formObj.attr("action", "/board/removePage");
+		formObj.attr("action", "/sboard/removePage");
 		formObj.submit();
 	});
 	
 	$(".goListBtn").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/board/listPage");
+		formObj.attr("action", "/sboard/list");
 		formObj.submit();
 	});
 	
