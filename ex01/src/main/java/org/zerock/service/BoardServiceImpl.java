@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.SearchCriteria;
 import org.zerock.persistence.BoardDAO;
 
 @Service
@@ -50,6 +51,16 @@ public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 @Override
 public int listCountCriteria(Criteria cri) throws Exception {
 	return dao.countPaging(cri);
+}
+
+@Override
+public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+	return dao.listSearch(cri);
+}
+
+@Override
+public int listSearchCount(SearchCriteria cri) throws Exception {
+	return dao.listSearchCount(cri);
 }
 
 

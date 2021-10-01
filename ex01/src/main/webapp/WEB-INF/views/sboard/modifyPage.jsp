@@ -31,11 +31,11 @@
 						</div>
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> <input type="text"
+							<label for="exampleInputEmail1">스타일</label> <input type="text"
 								name='스타일' class="form-control" value="${boardVO['스타일']}">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
+							<label for="exampleInputPassword1">태그가</label>
 							<textarea class="form-control" name="태그가" rows="3">${boardVO['태그가']}</textarea>
 						</div>
 					</div>

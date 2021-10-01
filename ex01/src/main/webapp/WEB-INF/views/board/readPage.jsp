@@ -24,14 +24,13 @@
     
   <div class="box-body">
     <div class="form-group">
-      <label for="exampleInputEmail1">Title</label>
-      <input type="text" name='title' class="form-control" 
+      <label for="exampleInputEmail1">스타일</label>
+      <input type="text" name='스타일' class="form-control" 
          value="${boardVO['스타일']}" readonly="readonly">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control"  name="content" rows="3" 
-      readonly="readonly">${boardVO['태그가']}</textarea>
+      <label for="exampleInputPassword1">태그가</label>
+      <textarea class="form-control"  name="태그가" rows="3" readonly="readonly">${boardVO['태그가']}</textarea>
     </div>
 
   </div><!-- /.box-body -->
